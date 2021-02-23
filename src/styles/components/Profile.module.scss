@@ -1,0 +1,33 @@
+@import '../variables';
+
+.profileContainer {
+  display: flex;
+  align-items: center;
+
+  .userPicture {
+    $size: 5.5rem;
+
+    width: $size;
+    height: $size;
+    border-radius: 50%;
+  }
+
+  div {
+    margin-left: 1.5rem;
+
+    .userName {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: $title;
+    }
+
+    .userLevel {
+      font-size: 1rem;
+      margin-top: 0.5rem;
+    }
+
+    .icon {
+      margin-right: 0.5rem;
+    }
+  }
+}

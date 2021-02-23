@@ -1,0 +1,69 @@
+@import '../variables';
+
+.experienceBar {
+  display: flex;
+  align-items: center;
+
+  .initialValue,
+  .finalValue {
+    font-size: 1rem;
+  }
+  
+  .completed {
+    position: relative;
+    flex: 1;
+    height: 10px;
+    border-radius: 4px;
+    background: $gray-line;
+    margin: 0 1.5rem;
+
+    .fill {
+      position: relative;
+      height: 100%;
+      border-radius: 4px;
+      background: $blue;
+
+      &::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 10px;
+        transform: translateY(-50%);
+        height: 4px;
+        border-radius: 10px;
+        opacity: .35;
+        background: $green-light;
+        width: 95%;
+      }
+    }
+    
+  }
+  
+  .currentExperience {
+    position: absolute;
+    top: 2rem;
+    transform: translateX(-50%);
+    background: $white;
+    padding: 8px;
+    user-select: none;
+    box-shadow: 2px 2px 5px rgba(#ccc, .35);
+    border-radius: 2.5px;
+
+    &::before {
+      $size: 20px;
+    
+      content: '';
+      position: absolute;
+      top: -25%;
+      left: 50%;
+    
+      width: $size;
+      height: $size;
+    
+      transform: translateX(-50%) rotate(45deg);
+      z-index: -1;
+      background: $white;
+    } 
+  }
+  
+}
