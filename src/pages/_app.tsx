@@ -1,7 +1,6 @@
-import '../styles/_globals.scss';
-
-import { ChallengesProvider } from '../contexts/ChallengesContext';
 import React from 'react';
+import { ChallengesProvider } from '../contexts/ChallengesContext';
+import '../styles/_globals.scss';
 
 function MyApp({ Component, pageProps }) {
   return (
