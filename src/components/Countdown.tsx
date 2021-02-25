@@ -1,28 +1,50 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import style from '../styles/components/Countdown.module.scss';
+import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome'
+import { faCheckCircle } from '@fortawesome/free-solid-svg-icons'
+import { ChallengesContext } from '../contexts/ChallengesContext';
+
+let countdownTimeout: NodeJS.Timeout;
 
 const Countdown: React.FC = () => {
-  const [time, setTime] = useState(25 * 60);
-  const [active, setActive] = useState(false);
+  const { startNewChallenge } = useContext(ChallengesContext);
+  const initialTime = 0.05 * 60;
+  const [time, setTime] = useState(initialTime);
+  const [isActive, setIsActive] = useState(false);
+  const [hasFinished, setHasFinished] = useState(false);
 
   const minutes = Math.floor(time / 60);
   const seconds = time % 60;
 
-  const getSplitedTime = (time: number | string) => {
-    return String(time).padStart(2, '0').split('');
-  }
+  const parseCurrentTime = (time: number | string) => {
+    return String(time).padStart(2, '0');
+  };
 
-  const [minuteLeft, minuteRight] = getSplitedTime(minutes);
-  const [secondLeft, secondRight] = getSplitedTime(seconds);
+  const [minuteLeft, minuteRight] = parseCurrentTime(minutes).split('');
+  const [secondLeft, secondRight] = parseCurrentTime(seconds).split('');
 
   useEffect(() => {
-    if (!active || time <= 0) return;
+    if (!isActive) return;
+    else if (isActive && time === 0) {
+      setHasFinished(true);
+      setIsActive(false);
+      startNewChallenge();
+      
+      return;
+    }
 
-    setTimeout(() => setTime(time - 1), 1000);
-  }, [active, time]);
+    countdownTimeout = setTimeout(() => {
+      // document.title = `move.it | ${parseCurrentTime(minutes)}:${parseCurrentTime(seconds)}`;
+      setTime(time - 1);
+    }, 1000);
+  }, [isActive, time]);
 
-  const startCountdown = () => {
-    setActive(true);
+  const startCountdown = () => setIsActive(true);
+
+  const resetCountdown = () => {
+    clearTimeout(countdownTimeout);
+    setIsActive(false);
+    setTime(initialTime);
   };
 
   return (
@@ -41,9 +63,26 @@ const Countdown: React.FC = () => {
         </div>
       </div>
 
-      <button className={style.countdownButton} onClick={startCountdown}>
-        Iniciar um ciclo
-      </button>
+      {hasFinished ? (
+        <button disabled className={style.countdownButton}>
+          Ciclo encerrado <Icon icon={faCheckCircle} className={style.doneIcon} />
+        </button>
+      ) : (
+        <>
+          {isActive ? (
+            <button
+              className={`${style.countdownButton} ${style.countdownButtonActive}`}
+              onClick={resetCountdown}
+            >
+              Abandonar ciclo
+            </button>
+          ) : (
+            <button className={style.countdownButton} onClick={startCountdown}>
+              Iniciar um ciclo
+            </button>
+          )}
+        </>
+      )}
     </div>
   );
 };

@@ -1,4 +1,5 @@
 @import '../variables';
+@import '../helpers';
 
 .countdownContainer {
   display: flex;
@@ -45,9 +46,7 @@
   margin-top: 2rem;
   outline: none;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  @include flex-center;
 
   border: 0;
   border-radius: 5px;
@@ -58,7 +57,29 @@
   font-weight: 600;
   transition: background .2s ease-in-out;
 
-  &:hover {
+  &:not(:disabled):hover {
     background: $blue-dark;
+  }
+
+  &Active {
+    background: $white;
+    color: $title;
+
+    &:not(:disabled):hover {
+      background: $red;
+      color: $white;
+    }
+  }
+
+  &:disabled {
+    background: $white;
+    color: $text;
+    cursor: not-allowed;
+    border-bottom: 5px solid $green;
+
+    .doneIcon {
+      margin-left: .75rem;
+      color: $green;
+    }
   }
 }

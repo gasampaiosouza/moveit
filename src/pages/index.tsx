@@ -6,6 +6,7 @@ import style from '../styles/pages/Home.module.scss';
 import Countdown from '../components/Countdown';
 
 import Head from 'next/head';
+import ChallengeBox from '../components/ChallengeBox';
 
 const App: React.FC = () => {
   return (
@@ -23,7 +24,9 @@ const App: React.FC = () => {
           <Countdown />
         </div>
 
-        <div></div>
+        <div>
+          <ChallengeBox />
+        </div>
       </section>
     </div>
   );
