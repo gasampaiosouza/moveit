@@ -1,8 +1,13 @@
 import { createContext, ReactNode, useEffect, useState } from 'react';
+import Cookies from 'js-cookie';
 import challenges from '../../challenges.json';
+import LevelUpModal from '../components/LevelUpModal';
 
 interface IChallengesProvider {
   children: ReactNode;
+  level: number;
+  currentXP: number;
+  completedChallenges: number;
 }
 
 type Challenge = { type: 'body' | 'eye'; description: string; amount: number };
@@ -12,6 +17,7 @@ interface ChallengesContextData {
   levelUp: () => void;
   resetChallenge: () => void;
   completeChallenge: () => void;
+  closeLevelUpModal: () => void;
   level: number;
   currentXP: number;
   experienceToNextLevel: number;
@@ -21,20 +27,34 @@ interface ChallengesContextData {
 
 export const ChallengesContext = createContext({} as ChallengesContextData);
 
-export function ChallengesProvider({ children }: IChallengesProvider) {
-  const [level, setLevel] = useState(1);
-  const [currentXP, setCurrentXP] = useState(0);
-  const [completedChallenges, setCompletedChallenges] = useState(0);
+export function ChallengesProvider({ children, ...rest }: IChallengesProvider) {
+  const [level, setLevel] = useState(rest.level ?? 1);
+  const [currentXP, setCurrentXP] = useState(rest.currentXP ?? 0);
+  const [completedChallenges, setCompletedChallenges] = useState(
+    rest.completedChallenges ?? 0
+  );
 
   const [activeChallenge, setActiveChallenge] = useState(null);
+  const [isLevelUpModalOpen, setIsLevelUpModalOpen] = useState(null);
 
-  const experienceToNextLevel = Math.pow((level + 1) * 4, 2)
+  const experienceToNextLevel = Math.pow((level + 1) * 4, 2);
 
   useEffect(() => {
     Notification.requestPermission();
   }, []);
 
-  const levelUp = () => setLevel(level + 1);
+  useEffect(() => {
+    Cookies.set('level', String(level));
+    Cookies.set('currentXP', String(currentXP));
+    Cookies.set('completedChallenges', String(completedChallenges));
+  }, [level, currentXP, completedChallenges]);
+
+  const levelUp = () => {
+    setLevel(level + 1);
+    setIsLevelUpModalOpen(true);
+  };
+
+  const closeLevelUpModal = () => setIsLevelUpModalOpen(false);
 
   const startNewChallenge = () => {
     const randomChallengeIndex = Math.floor(Math.random() * challenges.length);
@@ -46,8 +66,8 @@ export function ChallengesProvider({ children }: IChallengesProvider) {
 
     if (Notification.permission === 'granted') {
       new Notification('Novo desafio 🎉', {
-        body: `Valendo ${challenge.amount}xp!`
-      })
+        body: `Valendo ${challenge.amount}xp!`,
+      });
     }
   };
 
@@ -68,7 +88,7 @@ export function ChallengesProvider({ children }: IChallengesProvider) {
     setCurrentXP(finalXP);
     setActiveChallenge(null);
     setCompletedChallenges(completedChallenges + 1);
-  }
+  };
 
   return (
     <ChallengesContext.Provider
@@ -81,10 +101,13 @@ export function ChallengesProvider({ children }: IChallengesProvider) {
         activeChallenge,
         experienceToNextLevel,
         resetChallenge,
-        completeChallenge
+        completeChallenge,
+        closeLevelUpModal
       }}
     >
       {children}
+
+      {isLevelUpModalOpen && <LevelUpModal />}
     </ChallengesContext.Provider>
   );
 }
