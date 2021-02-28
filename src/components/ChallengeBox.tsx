@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import { ChallengesContext } from '../contexts/ChallengesContext';
 import { CountdownContext } from '../contexts/CountdownContext';
+import setPageTitle from '../helpers/setPageTitle';
 import style from '../styles/components/ChallengeBox.module.scss';
 
 const ChallengeBox: React.FC = () => {
@@ -9,15 +10,20 @@ const ChallengeBox: React.FC = () => {
   );
 
   const { resetCountdown } = useContext(CountdownContext);
+  const defaultPageTitle = 'Início | move.it';
 
   const handleChallengeSuccess = () => {
     completeChallenge();
+    
     resetCountdown();
+    setPageTitle(defaultPageTitle);
   };
 
   const handleChallengeFailed = () => {
     resetChallenge();
+    
     resetCountdown();
+    setPageTitle(defaultPageTitle);
   };
 
   return (

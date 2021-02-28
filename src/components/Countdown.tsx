@@ -12,11 +12,8 @@ const Countdown: React.FC = () => {
     seconds,
     resetCountdown,
     startCountdown,
+    parseCurrentTime
   } = useContext(CountdownContext);
-
-  const parseCurrentTime = (time: number | string) => {
-    return String(time).padStart(2, '0');
-  };
 
   const [minuteLeft, minuteRight] = parseCurrentTime(minutes).split('');
   const [secondLeft, secondRight] = parseCurrentTime(seconds).split('');

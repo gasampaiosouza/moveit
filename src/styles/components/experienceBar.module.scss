@@ -38,6 +38,11 @@
     }
     
   }
+
+  .fill,
+  .currentExperience {
+    transition: 1s ease-in-out;
+  }
   
   .currentExperience {
     position: absolute;
