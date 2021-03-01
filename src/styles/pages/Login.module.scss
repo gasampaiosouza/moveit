@@ -1,0 +1,98 @@
+@import '../variables';
+@import '../helpers';
+
+.container {
+  width: 100vw;
+  height: 100vh;
+  background: $blue;
+  display: flex;
+
+  &LeftSide img {
+    width: 50vw;
+  }
+
+  &RightSide {
+    @include flex-center {
+      align-items: flex-start;
+      flex-direction: column;
+    };
+    
+    color: $white;
+    height: 80vh;
+    margin: auto;
+
+    .logo {
+      margin-bottom: 6rem;
+    }
+
+    h2 {
+      font-size: 2.25rem;
+    }
+
+    .githubMessage {
+      display: flex;
+      align-items: center;
+      max-width: 19.875rem;
+      color: $text-highlight;
+      margin: 2.2rem 0 3rem;
+
+      img {
+        margin-right: 1.5rem;
+      }
+
+      span {
+        font-size: 1.25rem;
+      }
+    }
+
+    .loginForm {
+      display: flex;
+
+      &.active button {
+        background: $green;
+      }
+
+      input,
+      button {
+        color: $white;
+        border: 0;
+      }
+
+      input {
+        min-width: 21.25rem;
+        padding: 1.2rem 1.3rem;
+        background: linear-gradient(
+          90deg,
+          #4953b8 0%,
+          rgba(73, 83, 184, 0.2) 100%
+        );
+        border-radius: 5px 0px 0px 5px;
+        font-size: 1.25rem;
+
+        &::placeholder {
+          color: $text-highlight;
+          font-size: 1.25rem;
+        }
+      }
+
+      button {
+        $size: 5rem;
+        width: $size;
+        height: $size;
+        background: $blue-dark;
+        border-radius: 0px 5px 5px 0px;
+        font-size: 1.5rem;
+        transition: 0.2s ease-in-out;
+
+        &:disabled {
+          cursor: no-drop;
+        }
+      }
+    }
+
+    .formError {
+      margin-top: 1rem;
+      color: $red;
+    }
+  }
+}

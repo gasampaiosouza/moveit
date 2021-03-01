@@ -37,4 +37,12 @@ a {
   text-decoration: none;
 }
 
-
+.loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: $blue;
+  font-size: 3rem;
+  font-weight: 700;
+}

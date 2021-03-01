@@ -13,6 +13,7 @@
     "@fortawesome/react-fontawesome": "^0.1.14",
     "js-cookie": "^2.2.1",
     "next": "10.0.7",
+    "nextjs-redirect": "^5.0.2",
     "react": "17.0.1",
     "react-dom": "17.0.1"
   },

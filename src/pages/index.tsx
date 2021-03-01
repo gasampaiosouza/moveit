@@ -1,5 +1,8 @@
+import cookies from 'js-cookie';
 import { GetServerSideProps } from 'next';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
+import React, { useEffect } from 'react';
 import ChallengeBox from '../components/ChallengeBox';
 import CompletedChallenges from '../components/CompletedChallenges';
 import Countdown from '../components/Countdown';
@@ -16,7 +19,24 @@ interface IHome {
 }
 
 const App: React.FC<IHome> = (props) => {
-  return (
+  const user = cookies.getJSON('user');
+  const router = useRouter();
+
+  const resetUserScore = () => {
+    cookies.set('level', '1');
+    cookies.set('currentXP', '0');
+    cookies.set('completedChallenges', '0');
+  };
+
+  useEffect(() => {
+    if (!user || !user.isLoggedIn) {
+      resetUserScore();
+      router.replace('/login');
+      return;
+    }
+  }, []);
+
+  return user ? (
     <ChallengesProvider
       level={props.level}
       currentXP={props.currentXP}
@@ -44,7 +64,7 @@ const App: React.FC<IHome> = (props) => {
         </CountdownProvider>
       </div>
     </ChallengesProvider>
-  );
+  ) : <h1 className="loading">Carregando...</h1>;
 };
 
 export default App;

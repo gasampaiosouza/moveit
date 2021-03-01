@@ -102,7 +102,7 @@ export function ChallengesProvider({ children, ...rest }: IChallengesProvider) {
         experienceToNextLevel,
         resetChallenge,
         completeChallenge,
-        closeLevelUpModal
+        closeLevelUpModal,
       }}
     >
       {children}
