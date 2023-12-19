@@ -1,34 +1,43 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Move It 💪🚀
 
-## Getting Started
+![Move It App](https://github.com/gasampaiosouza/moveit/assets/47998700/f72da4d6-b229-464c-8a62-8a2a4bf39085)
 
-First, run the development server:
+Inspired by the Pomodoro Technique, Move It is an application where you complete 25-minute cycles and earn XP, leveling up as you progress.
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+## Features 🎮
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Gamification:** Advance levels and earn XP by completing cycles.
+- **Pomodoro Cycles:** Progress through cycles as you level up.
+- **Challenges:** Level-based challenges tailored to users.
+- **Challenge Tracker:** Keep count of completed challenges.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+## Getting Started 🚀
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+To get started with Move It:
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+1. Clone this repository.
+2. Install dependencies using `npm install`.
+3. Run the app using `npm run dev`.
 
-## Learn More
+## Technologies Used 🛠️
 
-To learn more about Next.js, take a look at the following resources:
+- **Next.js:** React framework for server-rendered applications.
+- **TypeScript:** Typed JavaScript for enhanced development.
+- **SCSS:** Styling solution for enhanced design and structure.
+- **React Context:** Utilized contexts extensively for state management.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## How to Contribute 🤝
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+If you want to contribute to Move It, follow these steps:
 
-## Deploy on Vercel
+1. Fork this repository.
+2. Create a branch: `git checkout -b feature/your-feature`.
+3. Commit your changes: `git commit -m 'Add some feature'`.
+4. Push to the branch: `git push origin feature/your-feature`.
+5. Submit a pull request.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Acknowledgments 🙏
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+This project was developed during the NLW (Next Level Week) by Rocketseat.
+
+Feel free to contribute, suggest improvements, or report issues!
